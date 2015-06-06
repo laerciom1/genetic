@@ -5,27 +5,56 @@
  */
 package src;
 
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  *
  * @author CH1CO
  */
 public class Gene {
-    ArrayList<Float> cromo = new ArrayList<Float>();
+    ArrayList<Double> cromo = new ArrayList<Double>();
+    String name = new String();
     
-    public float getCromo(int id){
+    public ArrayList<Double> getList(){
+        return cromo;
+    }
+    
+    public void setName(String name){
+        this.name = name;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public double getCromo(int id){
         return cromo.get(id-1);
     }
     
-    public void print(){
-        for(Float f:cromo){
-            System.out.print(""+f.toString()+" ");
+    public String print(){
+        String resultado = new String();
+        resultado += this.name;
+        resultado += ":\t";
+        for(Double f:cromo){
+            resultado += Double.valueOf(String.format(Locale.US, "%.2f", f)).toString();
+            resultado += "\t";
         }
-        System.out.println("");
+        resultado += "\n";
+        return resultado;
     }
 
-    public void add(float f){
+    public void add(double f){
         cromo.add(f);
+    }
+    
+    public double[] toVector(){
+        double[] resultado = new double[cromo.size()];
+        for(int i = 0; i < cromo.size(); i++){
+            resultado[i] = cromo.get(i);
+        }
+        return resultado;
     }
 }

@@ -35,12 +35,15 @@ public class LeitorArquivo {
         while((data = breader.readLine()) != null){
             Gene g = new Gene();
             String[] resultado = data.split("\t");
+            g.setName(resultado[0]);
             for(int i = 1; i < resultado.length; i++){
                 float f = Float.parseFloat(resultado[i]);
                 g.add(f);
             }
             amostra.add(g);
         }
+        
+        //amostra.printAssinatura();
         
         /* Comandos para testes
         amostra.printAll();

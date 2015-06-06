@@ -22,24 +22,16 @@ public final class TelaPrincipal extends JFrame{
     JMenuBar menuBar = new JMenuBar();
     JMenu menuAbrir = new JMenu("Abrir");  
     JMenu menuRodar = new JMenu ("Rodar");
-    JMenu menuAlterar = new JMenu ("Alterar");
     JMenu menuExibir = new JMenu ("Exibir");
-    JMenu menuSalvar = new JMenu ("Salvar");
-    
     JMenuItem menuAmostras = new JMenuItem("Amostras");  
     JMenuItem menuGAmostras = new JMenuItem("Grupo de Amostras"); 
-    
     JMenuItem menuAgrupamento = new JMenuItem("Agrupamento"); 
     JMenuItem menuValidacao = new JMenuItem("Validação Cruzada"); 
-    
-    JMenuItem menuCCorte = new JMenuItem("Criterio de Corte");
-    
     JMenuItem menuEListaGenes = new JMenuItem("Lista de Genes");
+    JMenuItem menuEAssinatura = new JMenuItem("Assinatura genica");
     JMenuItem menuEDendograma = new JMenuItem("Dendograma");
     
-    JMenuItem menuSListaGenes = new JMenuItem("Lista de Genes");
-    JMenuItem menuSMatriz = new JMenuItem("Matriz de Distância");
-    JMenuItem menuSDendograma = new JMenuItem("Dendograma");
+    Amostra amostra;
     
     public TelaPrincipal(){
         super();  
@@ -52,7 +44,8 @@ public final class TelaPrincipal extends JFrame{
         this.setLocationRelativeTo(null);  
         initTelaPrincipal();
         menuAmostras.addActionListener((ActionEvent e) -> { try {
-            SeletorArquivo.getInstance().setVisible(true);
+            new SeletorArquivo();
+            this.amostra = SeletorArquivo.getAmostra();
             } catch (IOException ex) {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -60,10 +53,9 @@ public final class TelaPrincipal extends JFrame{
         menuGAmostras.addActionListener( (ActionEvent e) -> { } );
         menuAgrupamento.addActionListener( (ActionEvent e) -> { } );
         menuValidacao.addActionListener( (ActionEvent e) -> { } );
-        menuCCorte.addActionListener((ActionEvent e) -> { } );
-        menuEListaGenes.addActionListener( (ActionEvent e) -> { } );
+        menuEListaGenes.addActionListener( (ActionEvent e) -> { new TelaEListaGenes(amostra); } );
+        menuEAssinatura.addActionListener( (ActionEvent e) -> { new TelaEAssinatura(amostra); } );
         menuEDendograma.addActionListener( (ActionEvent e) -> { } ); 
-        menuSalvar.addActionListener( (ActionEvent e) -> { } );
         this.setVisible(true);
     }
     
@@ -76,17 +68,12 @@ public final class TelaPrincipal extends JFrame{
          menuAbrir.add(menuGAmostras);
          menuRodar.add(menuAgrupamento);
          menuRodar.add(menuValidacao);
-         menuAlterar.add(menuCCorte);
          menuExibir.add(menuEListaGenes);
-         menuExibir.add(menuEDendograma);
-         menuSalvar.add(menuSListaGenes);
-         menuSalvar.add(menuSMatriz);
-         menuSalvar.add(menuSDendograma);
+         menuExibir.add(menuEAssinatura);
+         menuExibir.add(menuEDendograma);         
          menuBar.add(menuAbrir);  
          menuBar.add(menuRodar);
-         menuBar.add(menuAlterar);
-         menuBar.add(menuExibir);
-         menuBar.add(menuSalvar);        
+         menuBar.add(menuExibir);     
     }
     
     public static void main(String[] args){

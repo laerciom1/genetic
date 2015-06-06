@@ -5,10 +5,14 @@
  */
 package src;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFileChooser;
+import org.apache.commons.math3.stat.descriptive.moment.Variance;
 
 /**
  *
@@ -16,27 +20,29 @@ import javax.swing.JFileChooser;
  */
 public class SeletorArquivo extends JFileChooser{
     private static SeletorArquivo chooser;
-    File file;
+    private BufferedReader breader;
+    private FileReader freader;
+    private File file;
+    private static Amostra amostra;
     FileFilter filter = new FileFilter() {
         @Override
         public boolean accept(File file) {
-            return file.isDirectory() || file.getAbsolutePath().endsWith(".txt");//To change body of generated methods, choose Tools | Templates.
+            return file.isDirectory() || file.getAbsolutePath().endsWith(".txt");
         }
         public String getDescription() {
-            // This description will be displayed in the dialog,
-            // hard-coded = ugly, should be done via I18N
-            return "Text documents (*.txt)";
+            return "Documentos de texto (*.txt)";
         }
     };
     
-    private SeletorArquivo() throws IOException{
+    public SeletorArquivo() throws IOException, FileNotFoundException{
         JFileChooser fc = new JFileChooser();
         int opcao = fc.showOpenDialog(this);
         if (opcao == JFileChooser.APPROVE_OPTION) {
             if(filter.accept(fc.getSelectedFile())){
                 this.file = fc.getSelectedFile();
-                LeitorArquivo leitor = new LeitorArquivo(file);
-                leitor.ler();
+                this.freader = new FileReader(file);
+                this.breader = new BufferedReader(freader);
+                ler();
             }
             else{
                 TelaTipoDoArquivo.getInstance();
@@ -44,11 +50,27 @@ public class SeletorArquivo extends JFileChooser{
         }
     }
     
-    public static SeletorArquivo getInstance() throws IOException{
-        if(chooser == null){
-            chooser = new SeletorArquivo();
+    public void ler() throws IOException{
+        amostra = new Amostra();
+        String data;
+        double[] v;
+        Variance variance = new Variance();
+        while((data = breader.readLine()) != null){
+            Gene g = new Gene();
+            String[] resultado = data.split("\t");
+            g.setName(resultado[0]);
+            for(int i = 1; i < resultado.length; i++){
+                float f = Float.parseFloat(resultado[i]);
+                g.add(f);
+            }
+            amostra.add(g);
+            v = g.toVector();
+            amostra.assinatura.add(variance.evaluate(v), amostra.getGenes().indexOf(g));
         }
-        return chooser;
+    }
+    
+    public static Amostra getAmostra(){
+        return amostra;
     }
     
     public File getSelectedFile(){
