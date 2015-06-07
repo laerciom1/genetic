@@ -5,7 +5,6 @@ package src;
 
 import static java.lang.Math.abs;
 import java.util.ArrayList;
-
 public class EDMatrizDistancia {
     double[][] matriz;
     ArrayList<EDGene> genes;
@@ -26,7 +25,7 @@ public class EDMatrizDistancia {
                     for(int k = 0; k < variancias.length; k++){
                         double ei = genes.get(variancias[k].getId()).getCromo(i);
                         double ej = genes.get(variancias[k].getId()).getCromo(j);
-                        matriz[j][i] += abs(ei - ej);
+                        matriz[j][i] += Math.sqrt((ei - ej)*(ei - ej));
                     }
                     distancias.add(i+1, j+2, matriz[j][i]);
                 }

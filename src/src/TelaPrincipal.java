@@ -23,10 +23,8 @@ public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseL
     JMenu menuRodar = new JMenu ("Rodar");
     JMenu menuExibir = new JMenu ("Exibir");
     JMenu menuDefinir = new JMenu ("Definir");
-    JMenuItem menuAmostras = new JMenuItem("Amostras");  
-    JMenuItem menuGAmostras = new JMenuItem("Grupo de Amostras"); 
+    JMenuItem menuAmostras = new JMenuItem("Amostras");   
     JMenuItem menuTamanho = new JMenuItem("Tamanho da Assinatura");
-    JMenuItem menuPValor = new JMenuItem("P-Valor"); 
     JMenuItem menuAgrupamento = new JMenuItem("Agrupamento"); 
     JMenuItem menuValidacao = new JMenuItem("Validação Cruzada"); 
     JMenuItem menuEListaGenes = new JMenuItem("Lista de Genes");
@@ -54,16 +52,16 @@ public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseL
             this.t = new TelaDTamanhoAssinatura();
             this.t.setResponseListener(this); 
         });
-        menuGAmostras.addActionListener( (ActionEvent e) -> { } );
         menuTamanho.addActionListener( (ActionEvent e) -> {
         this.t = new TelaDTamanhoAssinatura();
         this.t.setResponseListener(this); 
         } );
-        menuGAmostras.addActionListener( (ActionEvent e) -> { } );
         menuAgrupamento.addActionListener( (ActionEvent e) -> { } );
         menuValidacao.addActionListener( (ActionEvent e) -> { } );
         menuEListaGenes.addActionListener( (ActionEvent e) -> { new TelaEListaGenes(amostra); } );
-        menuEAssinatura.addActionListener( (ActionEvent e) -> { new TelaEAssinatura(amostra); } );
+        menuEAssinatura.addActionListener( (ActionEvent e) -> { new TelaEAssinatura(amostra); 
+            EDMatrizDistancia md = new EDMatrizDistancia(amostra);
+        } );
         menuEDendograma.addActionListener( (ActionEvent e) -> { } ); 
         this.setVisible(true);
     }
@@ -74,9 +72,7 @@ public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseL
          genetic.setIcon(new javax.swing.ImageIcon(getClass().getClassLoader().getResource("img/genetic.jpg")));
          genetic.setBounds(0, -50, 800, 600);
          menuAbrir.add(menuAmostras);
-         menuAbrir.add(menuGAmostras);
          menuDefinir.add(menuTamanho);
-         menuDefinir.add(menuPValor);
          menuRodar.add(menuAgrupamento);
          menuRodar.add(menuValidacao);
          menuExibir.add(menuEListaGenes);
