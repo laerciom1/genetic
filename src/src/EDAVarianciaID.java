@@ -1,14 +1,14 @@
 /*
- * Estrutura auxilias para guardar a variancia e o ID do gene,
+ * Estrutura de dados auxiliar para guardar a variancia e o ID do gene,
  * que corresponde ao indice no ArrayList de genes da amostra.
  */
 package src;
 
-public class EstruturaAuxiliar {
+public class EDAVarianciaID {
     private double variancia;
     private int id;
     
-    public EstruturaAuxiliar(){
+    public EDAVarianciaID(){
     }
 
     public double getVariancia() {

@@ -11,39 +11,39 @@ import java.util.ArrayList;
 import java.util.Locale;
 import org.apache.commons.math3.stat.descriptive.moment.Variance;
 
-public class Amostra {
-    public Assinatura assinatura;
-    ArrayList<Gene> genes = new ArrayList<>();
+public class EDAmostra {
+    public EDAssinatura assinatura;
+    ArrayList<EDGene> genes = new ArrayList<>();
     
-    public Amostra(){
-        assinatura = new Assinatura();
+    public EDAmostra(int tamanho){
+        assinatura = new EDAssinatura(tamanho);
     }
     
-    public Gene getGene(int id){
+    public EDGene getGene(int id){
         return genes.get(id);
     }
     
-    public ArrayList<Gene> getGenes(){
+    public ArrayList<EDGene> getAllGenes(){
         return genes;
     }
     
-    public void add(Gene gene){
+    public void add(EDGene gene){
         this.genes.add(gene);
     }
     
     public void printAll(){
-        for(Gene g: genes){
+        for(EDGene g: genes){
             System.out.print("" + genes.indexOf(g) + " ");
             g.print();
         }
     }
     
-    public Assinatura getAssinatura(){
+    public EDAssinatura getAssinatura(){
         return assinatura;
     }
     
     public String printAssinatura(){
-        EstruturaAuxiliar[] variancias = assinatura.getAssinatura();
+        EDAVarianciaID[] variancias = assinatura.getAssinatura();
         String resultado = new String();
         for(int i = 0; i < variancias.length; i++){
             resultado += "Gene " + (variancias[i].getId()) + "\t->  Variancia:  " + Double.valueOf(String.format(Locale.US, "%.2f", variancias[i].getVariancia())).toString() + ",\n";

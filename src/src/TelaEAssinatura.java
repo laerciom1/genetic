@@ -23,7 +23,7 @@ public class TelaEAssinatura extends JFrame{
     JScrollPane scrollPane;
     JTextArea tArea;
     
-    public TelaEAssinatura(Amostra amostra){
+    public TelaEAssinatura(EDAmostra amostra){
         super("Assinatura");
         this.setLayout(null);
         this.setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -43,7 +43,7 @@ public class TelaEAssinatura extends JFrame{
         this.setVisible(true);
     }
     
-    private void initTelaEAssinatura(Amostra amostra){
+    private void initTelaEAssinatura(EDAmostra amostra){
         String resultado = new String();
         resultado = amostra.printAssinatura();
         Box box = Box.createHorizontalBox();

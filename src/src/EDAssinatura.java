@@ -1,6 +1,6 @@
 /*
  * Classe entidade para guardar a assinatura
- * Usamos um vetor da EstruturaAuxiliar para guardar.
+ * Usamos um vetor da EDAVarianciaID para guardar.
  * Todos os genes são adicionados aqui, mas para que sejam
  * efetivamente adicionados ao vetor o gene precisa ter a variancia
  * maior que a variancia do gene com menor variancia adicionado até
@@ -14,18 +14,18 @@ package src;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Assinatura {
-    private EstruturaAuxiliar[] variancias;
+public class EDAssinatura {
+    private EDAVarianciaID[] variancias;
     
-    public Assinatura(){
-        variancias = new EstruturaAuxiliar[50];
-        for(int i = 0; i < 50; i++){
-            variancias[i] = new EstruturaAuxiliar();
+    public EDAssinatura(int tamanho){
+        variancias = new EDAVarianciaID[tamanho];
+        for(int i = 0; i < tamanho; i++){
+            variancias[i] = new EDAVarianciaID();
             variancias[i].setVariancia(0);
         }
     }
     
-    public EstruturaAuxiliar[] getAssinatura(){
+    public EDAVarianciaID[] getAssinatura(){
         return variancias;
     }
     
@@ -34,6 +34,14 @@ public class Assinatura {
             variancias[0].setVariancia(variancia);
             variancias[0].setId(id);
             heapSort();
+        }
+    }
+    
+    public void setAssinatura(int tamanho){
+        this.variancias = new EDAVarianciaID[tamanho];
+        for(int i = 0; i < tamanho; i++){
+            variancias[i] = new EDAVarianciaID();
+            variancias[i].setVariancia(0);
         }
     }
     
@@ -80,7 +88,7 @@ public class Assinatura {
  
        public void swap (int j, int aposJ )
        {
-          EstruturaAuxiliar aux = variancias[j];
+          EDAVarianciaID aux = variancias[j];
           variancias[j] = variancias[aposJ];
           variancias[aposJ] = aux;
        }

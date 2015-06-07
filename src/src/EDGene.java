@@ -11,12 +11,12 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class Gene {
-    ArrayList<Double> cromo = new ArrayList<Double>();
+public class EDGene {
+    ArrayList<Double> list = new ArrayList<Double>();
     String name = new String();
     
     public ArrayList<Double> getList(){
-        return cromo;
+        return list;
     }
     
     public void setName(String name){
@@ -28,14 +28,14 @@ public class Gene {
     }
     
     public double getCromo(int id){
-        return cromo.get(id);
+        return list.get(id);
     }
     
     public String print(){
         String resultado = new String();
         resultado += this.name;
         resultado += ":\t";
-        for(Double f:cromo){
+        for(Double f:list){
             resultado += Double.valueOf(String.format(Locale.US, "%.2f", f)).toString();
             resultado += "\t";
         }
@@ -44,14 +44,14 @@ public class Gene {
     }
 
     public void add(double f){
-        cromo.add(f);
+        list.add(f);
     }
     
     //Converter arraylist em vetor de double para poder usar no método da biblioteca Apache Commons Math
     public double[] toVector(){
-        double[] resultado = new double[cromo.size()];
-        for(int i = 0; i < cromo.size(); i++){
-            resultado[i] = cromo.get(i);
+        double[] resultado = new double[list.size()];
+        for(int i = 0; i < list.size(); i++){
+            resultado[i] = list.get(i);
         }
         return resultado;
     }
