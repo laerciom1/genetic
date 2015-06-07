@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe que representa um conjunto de amostras.
+ * O ArrayList guarda os valores do gene para cada individuo da amostra.
+ * A assinatura é iniciada ao se fazer a leitura do arquivo, e guarda os top50 genes mais
+ * variáveis da amostra.
+ * A variancia é calulada usando a biblioteca Apache Commons Math 3.5.
  */
 package src;
 
@@ -9,10 +11,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 import org.apache.commons.math3.stat.descriptive.moment.Variance;
 
-/**
- *
- * @author CH1CO
- */
 public class Amostra {
     public Assinatura assinatura;
     ArrayList<Gene> genes = new ArrayList<>();

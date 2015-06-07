@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe entidade para representar um gene.
+ * É armazenado primeiramente o nome, e em seguinda a expressividade
+ * do gene em cada individuo, onde o cada indice do arraylist será
+ * a expressividade do gene em um individuo específico
  */
 package src;
 
@@ -10,10 +11,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-/**
- *
- * @author CH1CO
- */
 public class Gene {
     ArrayList<Double> cromo = new ArrayList<Double>();
     String name = new String();
@@ -50,6 +47,7 @@ public class Gene {
         cromo.add(f);
     }
     
+    //Converter arraylist em vetor de double para poder usar no método da biblioteca Apache Commons Math
     public double[] toVector(){
         double[] resultado = new double[cromo.size()];
         for(int i = 0; i < cromo.size(); i++){

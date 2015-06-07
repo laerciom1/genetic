@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe usada para selecionar o arquivo de entrada.
+ * Aqui o arquivo também será lido e as classes entidades
+ * serão inicializadas a partir dos dados lidos
  */
 package src;
 
@@ -14,38 +14,20 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import org.apache.commons.math3.stat.descriptive.moment.Variance;
 
-/**
- *
- * @author CH1CO
- */
 public class SeletorArquivo extends JFileChooser{
     private BufferedReader breader;
     private FileReader freader;
     private File file;
     private static Amostra amostra;
-    FileFilter filter = new FileFilter() {
-        @Override
-        public boolean accept(File file) {
-            return file.isDirectory() || file.getAbsolutePath().endsWith(".txt");
-        }
-        public String getDescription() {
-            return "Documentos de texto (*.txt)";
-        }
-    };
-    
+        
     public SeletorArquivo() throws IOException, FileNotFoundException{
         JFileChooser fc = new JFileChooser();
         int opcao = fc.showOpenDialog(this);
         if (opcao == JFileChooser.APPROVE_OPTION) {
-            if(filter.accept(fc.getSelectedFile())){
-                this.file = fc.getSelectedFile();
-                this.freader = new FileReader(file);
-                this.breader = new BufferedReader(freader);
-                ler();
-            }
-            else{
-                TelaTipoDoArquivo.getInstance();
-            }
+            this.file = fc.getSelectedFile();
+            this.freader = new FileReader(file);
+            this.breader = new BufferedReader(freader);
+            ler();
         }
     }
     
@@ -70,9 +52,5 @@ public class SeletorArquivo extends JFileChooser{
     
     public static Amostra getAmostra(){
         return amostra;
-    }
-    
-    public File getSelectedFile(){
-        return file;
     }
 }

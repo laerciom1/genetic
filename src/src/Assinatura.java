@@ -1,17 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe entidade para guardar a assinatura
+ * Usamos um vetor da EstruturaAuxiliar para guardar.
+ * Todos os genes são adicionados aqui, mas para que sejam
+ * efetivamente adicionados ao vetor o gene precisa ter a variancia
+ * maior que a variancia do gene com menor variancia adicionado até
+ * o momento.
+ * É utilizado heapsort para otimizar esse processo
+ * O código do heapsort é uma adaptação do código disponibilizado pela Wikipedia
+ * Referência: http://pt.wikipedia.org/wiki/Heapsort#C.C3.B3digo_em_Java
  */
 package src;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- *
- * @author CH1CO
- */
 public class Assinatura {
     private EstruturaAuxiliar[] variancias;
     
@@ -32,11 +34,6 @@ public class Assinatura {
             variancias[0].setVariancia(variancia);
             variancias[0].setId(id);
             heapSort();
-            /*System.out.println("Insenrindo" + variancia + ":");
-            for(int i = 0; i < 10; i++){
-                System.out.print(" " + variancias[i].getVariancia() + ":" +  variancias[i].getId());
-            }
-            System.out.println("\n");*/
         }
     }
     

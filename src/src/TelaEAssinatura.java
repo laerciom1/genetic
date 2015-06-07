@@ -1,19 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Tela que exibe a assinatura gerada;
  */
 package src;
 
-/**
- *
- * @author CH1CO
- */
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +14,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.Box;
-import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 
 public class TelaEAssinatura extends JFrame{

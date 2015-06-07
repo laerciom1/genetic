@@ -1,9 +1,11 @@
+/* Tela principal do sistema,
+ * onde serão exibidas todas
+ *  as opçoes para o usuário.
+*/
 package src;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,13 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-public final class TelaPrincipal extends JFrame{  
-    JPanel corpo = new JPanel();
-    JLabel busao = new JLabel();
+public final class TelaPrincipal extends JFrame{ 
+    JLabel genetic = new JLabel();
     JMenuBar menuBar = new JMenuBar();
     JMenu menuAbrir = new JMenu("Abrir");  
     JMenu menuRodar = new JMenu ("Rodar");
@@ -61,9 +60,9 @@ public final class TelaPrincipal extends JFrame{
     
     public void initTelaPrincipal() {
          this.setJMenuBar(menuBar);  
-         this.add(busao);
-         busao.setIcon(new javax.swing.ImageIcon(getClass().getClassLoader().getResource("img/genetic.jpg")));
-         busao.setBounds(0, -50, 800, 600);
+         this.add(genetic);
+         genetic.setIcon(new javax.swing.ImageIcon(getClass().getClassLoader().getResource("img/genetic.jpg")));
+         genetic.setBounds(0, -50, 800, 600);
          menuAbrir.add(menuAmostras);
          menuAbrir.add(menuGAmostras);
          menuRodar.add(menuAgrupamento);
