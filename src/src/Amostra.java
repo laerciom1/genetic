@@ -46,7 +46,7 @@ public class Amostra {
         EstruturaAuxiliar[] variancias = assinatura.getAssinatura();
         String resultado = new String();
         for(int i = 0; i < variancias.length; i++){
-            resultado += "Gene " + variancias[i].getId() + "\t->  Variancia:  " + Double.valueOf(String.format(Locale.US, "%.2f", variancias[i].getVariancia())).toString() + ",\n";
+            resultado += "Gene " + (variancias[i].getId()) + "\t->  Variancia:  " + Double.valueOf(String.format(Locale.US, "%.2f", variancias[i].getVariancia())).toString() + ",\n";
         }
         return resultado;
     }

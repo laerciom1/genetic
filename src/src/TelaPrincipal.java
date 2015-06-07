@@ -43,8 +43,12 @@ public final class TelaPrincipal extends JFrame{
         this.setLocationRelativeTo(null);  
         initTelaPrincipal();
         menuAmostras.addActionListener((ActionEvent e) -> { try {
-            new SeletorArquivo();
-            this.amostra = SeletorArquivo.getAmostra();
+            SeletorArquivo SA = new SeletorArquivo();
+            this.amostra = SA.getAmostra();
+            
+            MatrizDistancia m = new MatrizDistancia(amostra);
+            m.initMatriz();
+            m.printMatriz();
             } catch (IOException ex) {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }

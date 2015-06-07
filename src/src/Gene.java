@@ -28,7 +28,7 @@ public class Gene {
     }
     
     public double getCromo(int id){
-        return cromo.get(id-1);
+        return cromo.get(id);
     }
     
     public String print(){
