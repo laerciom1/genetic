@@ -54,5 +54,3 @@ public class TelaTipoDoArquivo extends JDialog{
         return tela;
     }
 }
-
-

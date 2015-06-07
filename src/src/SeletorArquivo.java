@@ -19,7 +19,6 @@ import org.apache.commons.math3.stat.descriptive.moment.Variance;
  * @author CH1CO
  */
 public class SeletorArquivo extends JFileChooser{
-    private static SeletorArquivo chooser;
     private BufferedReader breader;
     private FileReader freader;
     private File file;
