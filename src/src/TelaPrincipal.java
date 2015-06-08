@@ -17,6 +17,7 @@ import javax.swing.JMenuItem;
 import javax.swing.WindowConstants;
 
 public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseListener{ 
+    //Atributos do layout
     JLabel genetic = new JLabel();
     JMenuBar menuBar = new JMenuBar();
     JMenu menuAbrir = new JMenu("Abrir");  
@@ -31,60 +32,82 @@ public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseL
     JMenuItem menuEAssinatura = new JMenuItem("Assinatura genica");
     JMenuItem menuEDendograma = new JMenuItem("Dendograma");
     
+    //ED principal que armazenará os dados lidos do arquivo
     EDAmostra amostra;
-    int tamanho;
+    
+    //FileChooser para selecionar o arquivo através da interface gráfica
     SeletorArquivo SA;
+    
+    //Janela para escolher o tamanho da assinatura e o campo para guardar essa especificação
     TelaDTamanhoAssinatura t;
+    int tamanho;
     
     public TelaPrincipal(){
-        super();  
+        //Setando atributos da UI
+        super("Genetic"); 
+        initTelaPrincipal();
+        
+        //Configurando botões da UI
+        menuAmostras.addActionListener((ActionEvent e) -> { //Abrir arquivo de amostras
+            SA = new SeletorArquivo();
+            this.t = new TelaDTamanhoAssinatura();
+            this.t.setResponseListener(this); 
+        });
+        
+        menuTamanho.addActionListener( (ActionEvent e) -> { //Redefinir tamanho da assinatura
+            this.t = new TelaDTamanhoAssinatura();
+            this.t.setResponseListener(this); 
+        } );
+        
+        menuAgrupamento.addActionListener( (ActionEvent e) -> { //Rodar o algoritmo de agrupamento
+        
+        } );
+        
+        menuValidacao.addActionListener( (ActionEvent e) -> { //Rodar o algoritmo de valicação
+        
+        } );
+        
+        menuEListaGenes.addActionListener( (ActionEvent e) -> { //Exibir tela com os genes lidos
+            new TelaEListaGenes(amostra);
+        } );
+        
+        menuEAssinatura.addActionListener( (ActionEvent e) -> { //Exibir tela com a assinatura gerada
+            new TelaEAssinatura(amostra); 
+            EDMatrizDistancia md = new EDMatrizDistancia(amostra);
+            md.initMatriz();
+            md.printMatriz();
+        } );
+        
+        menuEDendograma.addActionListener( (ActionEvent e) -> { //Exibir tela com o dendograma gerado
+        
+        } ); 
+        
+        //Exibindo a janela
+        this.setVisible(true);
+    }
+    
+    public void initTelaPrincipal() {
         this.setLayout(null);
         this.setPreferredSize(new java.awt.Dimension(800, 600));
         this.setSize(800, 600);
         this.setResizable(false);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setTitle("Genetic");
         this.setLocationRelativeTo(null);  
-        
-        initTelaPrincipal();
-        menuAmostras.addActionListener((ActionEvent e) -> { 
-            SA = new SeletorArquivo();
-            this.t = new TelaDTamanhoAssinatura();
-            this.t.setResponseListener(this); 
-        });
-        menuTamanho.addActionListener( (ActionEvent e) -> {
-        this.t = new TelaDTamanhoAssinatura();
-        this.t.setResponseListener(this); 
-        } );
-        menuAgrupamento.addActionListener( (ActionEvent e) -> { } );
-        menuValidacao.addActionListener( (ActionEvent e) -> { } );
-        menuEListaGenes.addActionListener( (ActionEvent e) -> { new TelaEListaGenes(amostra); } );
-        menuEAssinatura.addActionListener( (ActionEvent e) -> { new TelaEAssinatura(amostra); 
-            EDMatrizDistancia md = new EDMatrizDistancia(amostra);
-            md.initMatriz();
-            md.printMatriz();
-        } );
-        menuEDendograma.addActionListener( (ActionEvent e) -> { } ); 
-        this.setVisible(true);
-    }
-    
-    public void initTelaPrincipal() {
-         this.setJMenuBar(menuBar);  
-         this.add(genetic);
-         genetic.setIcon(new javax.swing.ImageIcon(getClass().getClassLoader().getResource("img/genetic.jpg")));
-         genetic.setBounds(0, -50, 800, 600);
-         menuAbrir.add(menuAmostras);
-         menuDefinir.add(menuTamanho);
-         menuRodar.add(menuAgrupamento);
-         menuRodar.add(menuValidacao);
-         menuExibir.add(menuEListaGenes);
-         menuExibir.add(menuEAssinatura);
-         menuExibir.add(menuEDendograma); 
-         
-         menuBar.add(menuAbrir);  
-         menuBar.add(menuDefinir);
-         menuBar.add(menuRodar);
-         menuBar.add(menuExibir);     
+        this.setJMenuBar(menuBar);  
+        this.add(genetic);
+        genetic.setIcon(new javax.swing.ImageIcon(getClass().getClassLoader().getResource("img/genetic.jpg")));
+        genetic.setBounds(0, -50, 800, 600);
+        menuAbrir.add(menuAmostras);
+        menuDefinir.add(menuTamanho);
+        menuRodar.add(menuAgrupamento);
+        menuRodar.add(menuValidacao);
+        menuExibir.add(menuEListaGenes);
+        menuExibir.add(menuEAssinatura);
+        menuExibir.add(menuEDendograma); 
+        menuBar.add(menuAbrir);  
+        menuBar.add(menuDefinir);
+        menuBar.add(menuRodar);
+        menuBar.add(menuExibir);     
     }
     
     public static void main(String[] args){
