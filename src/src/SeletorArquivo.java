@@ -75,7 +75,7 @@ public class SeletorArquivo extends JFileChooser{
                 amostra.getAssinatura().add(variance.evaluate(v),   
                         amostra.getAllGenes().indexOf(g));          
                 /* Pegando a variancia de todos os genes para gerar a nova assinatura
-                 * Aqui há um imparce, pois poderia ser melhor já guardar a variância do gene dentro
+                 * Aqui há um impasse, pois poderia ser melhor já guardar a variância do gene dentro
                  * da ED que o representa. Mas isso geraria uma demanda maior de espaço na memória
                  * Logo, é preciso se pensar no custo benefício disso.
                  * Acreditamos que a redefinição do tamanho da assinatura não é algo recorrente,
