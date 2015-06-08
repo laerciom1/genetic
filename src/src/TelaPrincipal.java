@@ -61,6 +61,8 @@ public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseL
         menuEListaGenes.addActionListener( (ActionEvent e) -> { new TelaEListaGenes(amostra); } );
         menuEAssinatura.addActionListener( (ActionEvent e) -> { new TelaEAssinatura(amostra); 
             EDMatrizDistancia md = new EDMatrizDistancia(amostra);
+            md.initMatriz();
+            md.printMatriz();
         } );
         menuEDendograma.addActionListener( (ActionEvent e) -> { } ); 
         this.setVisible(true);

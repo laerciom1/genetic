@@ -42,4 +42,8 @@ public class EDADistancias {
     public void setDistancia(double distancia) {
         this.distancia = distancia;
     }
+    
+    public void print(){
+        System.out.println("Distancia entre " + id1 + " e " + id2 + ": " + distancia);
+    }
 }
