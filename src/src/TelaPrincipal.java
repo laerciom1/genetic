@@ -1,10 +1,8 @@
-/* Tela principal do sistema,
- * onde serão exibidas todas
- *  as opçoes para o usuário.
-*/
+/* Tela principal do sistema, onde serão exibidas todas
+ * as opçoes para o usuário.
+ */
 package src;
 
-import src.Drawer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -17,29 +15,20 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.WindowConstants;
 import processing.core.PApplet;
-import src.EDAmostra;
-import src.EDMatrizDistancia;
-import src.OnAssinaturaResponseListener;
-import src.SeletorArquivo;
-import src.TelaDTamanhoAssinatura;
-import src.TelaEAssinatura;
-import src.TelaEListaGenes;
 
 public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseListener{ 
     //Atributos do layout
     JLabel genetic = new JLabel();
     JMenuBar menuBar = new JMenuBar();
     JMenu menuAbrir = new JMenu("Abrir");  
-    JMenu menuRodar = new JMenu ("Rodar");
     JMenu menuExibir = new JMenu ("Exibir");
     JMenu menuDefinir = new JMenu ("Definir");
     JMenuItem menuAmostras = new JMenuItem("Amostras");   
     JMenuItem menuTamanho = new JMenuItem("Tamanho da Assinatura");
-    JMenuItem menuAgrupamento = new JMenuItem("Agrupamento"); 
-    JMenuItem menuValidacao = new JMenuItem("Validação Cruzada"); 
+    JMenuItem menuEMatriz = new JMenuItem("Matriz"); 
+    JMenuItem menuEListaDistancias = new JMenuItem("Rank de Distancias"); 
     JMenuItem menuEListaGenes = new JMenuItem("Lista de Genes");
     JMenuItem menuEAssinatura = new JMenuItem("Assinatura genica");
-    JMenuItem menuEDendograma = new JMenuItem("Dendograma");
     
     //ED principal que armazenará os dados lidos do arquivo
     EDAmostra amostra;
@@ -49,6 +38,9 @@ public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseL
     
     //Janela para escolher o tamanho da assinatura e o campo para guardar essa especificação
     TelaDTamanhoAssinatura t;
+    
+    //Estrutura para gerar e guardar a matriz de distancias
+    EDMatrizDistancia md = null;
     int tamanho;
     
     public TelaPrincipal(){
@@ -68,12 +60,24 @@ public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseL
             this.t.setResponseListener(this); 
         } );
         
-        menuAgrupamento.addActionListener( (ActionEvent e) -> { //Rodar o algoritmo de agrupamento
-        
+        menuEMatriz.addActionListener( (ActionEvent e) -> { //Exibir matriz de distancias
+            if(md != null){
+                new TelaEMatriz(md);
+            }
+            else{
+                md = new EDMatrizDistancia(amostra);
+                new TelaEMatriz(md);
+            }
         } );
         
-        menuValidacao.addActionListener( (ActionEvent e) -> { //Rodar o algoritmo de valicação
-        
+        menuEListaDistancias.addActionListener( (ActionEvent e) -> { //Exibir lista com rank das distancias (útil para gerar o Dendrograma)
+            if(md != null){
+                new TelaEListaDistancias(md);
+            }
+            else{
+                md = new EDMatrizDistancia(amostra);
+                new TelaEListaDistancias(md);
+            }
         } );
         
         menuEListaGenes.addActionListener( (ActionEvent e) -> { //Exibir tela com os genes lidos
@@ -82,15 +86,8 @@ public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseL
         
         menuEAssinatura.addActionListener( (ActionEvent e) -> { //Exibir tela com a assinatura gerada
             new TelaEAssinatura(amostra); 
-            EDMatrizDistancia md = new EDMatrizDistancia(amostra);
-            md.initMatriz();
-            md.printMatriz();
             //md.gerarDendograma();
         } );
-        
-        menuEDendograma.addActionListener( (ActionEvent e) -> { //Exibir tela com o dendograma gerado
-            Drawer.main("src.Drawer");
-        } ); 
         
         //Exibindo a janela
         this.setVisible(true);
@@ -109,14 +106,12 @@ public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseL
         genetic.setBounds(0, -50, 800, 600);
         menuAbrir.add(menuAmostras);
         menuDefinir.add(menuTamanho);
-        menuRodar.add(menuAgrupamento);
-        menuRodar.add(menuValidacao);
         menuExibir.add(menuEListaGenes);
         menuExibir.add(menuEAssinatura);
-        menuExibir.add(menuEDendograma); 
+        menuExibir.add(menuEMatriz);
+        menuExibir.add(menuEListaDistancias);
         menuBar.add(menuAbrir);  
         menuBar.add(menuDefinir);
-        menuBar.add(menuRodar);
         menuBar.add(menuExibir);     
     }
     

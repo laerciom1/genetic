@@ -1,23 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * PApplet (do Processing, biblioteca externa) que seria usado para desenhar
+ * o dendrograma
  */
 package src;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import processing.core.PApplet;
-/**
- *
- * @author CH1CO
- */
-public class Drawer extends PApplet{
+
+public class ZNF_Drawer extends PApplet{
     public void setup() {  // setup() runs once
         background(0);
         size(800, 600);
         fill(255);
-        for(EDArvoreDendograma ed:EDArvoreDendograma.getArrayED()){
+        //Pegando os dados salvos na estrutura imprimindo
+        for(ZNF_EDArvoreDendograma ed:ZNF_EDArvoreDendograma.getArrayED()){
             if(ed.isLine == true){
                 println("Line:");
                 line(ed.getLinha().getEX(), ed.getLinha().getEY(), ed.getLinha().getDX(), ed.getLinha().getDY());

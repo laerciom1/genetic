@@ -19,6 +19,10 @@ public class EDGene {
         return list;
     }
     
+    public void add(double f){
+        list.add(f);
+    }
+    
     public void setName(String name){
         this.name = name;
     }
@@ -31,7 +35,7 @@ public class EDGene {
         return list.get(id);
     }
     
-    public String print(){
+    public String print(){//Método que retorna as expressividades do gene em cada individuo em forma de texto
         String resultado = new String();
         resultado += this.name;
         resultado += ":\t";
@@ -43,10 +47,6 @@ public class EDGene {
         return resultado;
     }
 
-    public void add(double f){
-        list.add(f);
-    }
-    
     //Converter arraylist em vetor de double para poder usar no método da biblioteca Apache Commons Math
     public double[] toVector(){
         double[] resultado = new double[list.size()];

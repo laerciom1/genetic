@@ -1,6 +1,6 @@
 /*
  * Classe entidade para guardar a assinatura
- * Usamos um vetor da EDAVarianciaID para guardar.
+ * Usamos um vetor de EDAVarianciaID para guardar.
  * Todos os genes são adicionados aqui, mas para que sejam
  * efetivamente adicionados ao vetor o gene precisa ter a variancia
  * maior que a variancia do gene com menor variancia adicionado até
@@ -29,15 +29,27 @@ public class EDAssinatura {
         return variancias;
     }
     
-    public void add(double variancia, int id) {
+    public void add(double variancia, int id) { /* Esse método adiciona a variancia
+                                                 * apenas se ela for maior que
+                                                 * a menor variancia que se tem
+                                                 * até o momento.
+                                                 * A menor variancia sempre estará
+                                                 * no indice 0 do vetor. Isso é garantido
+                                                 * pelo uso do heapsort
+                                                 */
         if(variancia > variancias[0].getVariancia()){
             variancias[0].setVariancia(variancia);
             variancias[0].setId(id);
-            heapSort();
+            heapSort(); //Chamada do heapsort sempre que algum novo valor é inserido
         }
     }
     
-    public void setAssinatura(int tamanho){
+    public void setAssinatura(int tamanho){ /* Esse método é utilizado sempre que
+                                             * o usuário for setar um novo tamanho
+                                             * de assinatura. Ele cria um novo vetor
+                                             * do tamanho especificado, inicializa,
+                                             * depois o preenche usando os dados obtidos
+                                             */
         this.variancias = new EDAVarianciaID[tamanho];
         for(int i = 0; i < tamanho; i++){
             variancias[i] = new EDAVarianciaID();
@@ -45,7 +57,7 @@ public class EDAssinatura {
         }
     }
     
-    //Código adaptado de http://pt.wikipedia.org/wiki/Heapsort#C.C3.B3digo_em_Java
+    //Heapsort - Código adaptado de http://pt.wikipedia.org/wiki/Heapsort#C.C3.B3digo_em_Java
     public void heapSort()
        {
          buildMaxHeap();

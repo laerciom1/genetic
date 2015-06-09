@@ -62,7 +62,7 @@ public class TelaDTamanhoAssinatura extends JFrame{
         this.add(txt2);
     }
     
-    public void setResponseListener(OnAssinaturaResponseListener responseListener){
+    public void setResponseListener(OnAssinaturaResponseListener responseListener){//Setando qual objeto é listener dessa tela;
         this.responseListener = responseListener;
     }
 }

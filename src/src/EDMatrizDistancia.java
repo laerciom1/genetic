@@ -7,10 +7,13 @@ import static java.lang.Math.abs;
 import java.util.ArrayList;
 import java.util.Locale;
 public class EDMatrizDistancia {
-    double[][] matriz;
-    EDAmostra genes;
-    EDAVarianciaID[] variancias;
-    EDDistancias distancias;
+    double[][] matriz;//Matriz de double;
+    EDAmostra genes;                //Atributos que servirao
+    EDAVarianciaID[] variancias;    //para recuperar os dados
+    EDDistancias distancias;        //que já foram lidos anteriormente
+    boolean init = false;           /* Booleano para indicar se a matriz
+                                     * já foi iniciada
+                                     */
 
     public EDMatrizDistancia(EDAmostra amostra) {
         this.variancias = amostra.getAssinatura().getAssinatura();
@@ -20,55 +23,59 @@ public class EDMatrizDistancia {
     }
     
     public void initMatriz(){
-        int index = -1;
-        for(int i = 0; i < genes.getGene(0).getList().size(); i++){
-            for(int j = i+1; j < genes.getGene(0).getList().size(); j++){
-                for (EDAVarianciaID variancia : variancias) {
-                    double ei = genes.getGene(variancia.getId()).getCromo(i);
-                    double ej = genes.getGene(variancia.getId()).getCromo(j);
-                    matriz[i][j] += (ei - ej)*(ei - ej);
+        int index = -1; /* Variavel indice no vetor de distancias
+                         * usado posteriormente para se obter o rank de distancias
+                         */
+                            
+        for(int i = 0; i < genes.getGene(0).getList().size(); i++){         // genes.getGene(0).getList().size() retorna quantas posições 
+            for(int j = i+1; j < genes.getGene(0).getList().size(); j++){   // um gene possui, o que corresponde ao numero de individuos
+                for (EDAVarianciaID variancia : variancias) {   // Variancia possui o ID dos genes que formam a assinatura
+                                                                // ou seja, os relevantes para o calculo das distancias
+                    double ei = genes.getGene(variancia.getId()).getCromo(i); // Para cada gene, calcula-se a distancia entre todos
+                    double ej = genes.getGene(variancia.getId()).getCromo(j); // os individuos em relacao àquele gene.
+                    matriz[i][j] += (ei - ej)*(ei - ej); //O que é guardado na matriz é o somatório
+                                                         //do quadrado dessa distancia (para a distancia Euclidiada)
                 }
-                matriz[i][j] = Math.sqrt(matriz[i][j]);
-                //System.out.println("A " + i + " " + j + " " + matriz[i][j]);
-                distancias.add(++index, i, j, matriz[i][j]);
+                matriz[i][j] = Math.sqrt(matriz[i][j]); //Raiz do somatorio (para a distancia Euclidiana)
+                distancias.add(++index, i, j, matriz[i][j]); //Adicionando a distancia encontrada no vetor de distancias
             }
         }
-        distancias.heapSort();
+        distancias.heapSort(); /* Apos todas as distancias serem alocadas no vetor,
+                                * o heapsort é aplicado para que se tenha o rank.
+                                * Optamos pelo heapsort devido a natureza dos dados serem
+                                * bastante aleatória.
+                                */
     }
     
-/*    public void gerarDendograma(){
-        int x = 0;
-        for(EDADistancias ed: distancias.getDistancias()){
-            if(!EDArvoreDendograma.getArrayID().contains(ed.getId1()) && !EDArvoreDendograma.getArrayID().contains(ed.getId2())){
-                new EDArvoreDendograma(new EDArvoreDendograma(ed.getId1(), ++x), new EDArvoreDendograma(ed.getId2(), ++x), ed.getDistanciaFloat());
-            }
-            else if(EDArvoreDendograma.getArrayID().contains(ed.getId1()) && !EDArvoreDendograma.getArrayID().contains(ed.getId2())){
- //                new EDArvoreDendograma(EDArvoreDendograma.getInstance().getPai(ed.getId1()), new EDArvoreDendograma(ed.getId2(), ++x), ed.getDistanciaFloat());
-            }
-            else if(EDArvoreDendograma.getArrayID().contains(ed.getId2()) && !EDArvoreDendograma.getArrayID().contains(ed.getId1())){
-//                new EDArvoreDendograma(EDArvoreDendograma.getInstance().getPai(ed.getId2()), new EDArvoreDendograma(ed.getId1(), ++x), ed.getDistanciaFloat());
-            }
-            else if(EDArvoreDendograma.getInstance().getPai(ed.getId1()).equals(EDArvoreDendograma.getInstance().getPai(ed.getId2()))){
-                new EDArvoreDendograma(EDArvoreDendograma.getInstance().getPai(ed.getId1()), EDArvoreDendograma.getInstance().getPai(ed.getId2()), ed.getDistanciaFloat());
-            }
+    public String printMatriz(){ //Método que gera e retorna a matriz representada em texto
+        if(!init){
+            initMatriz();
         }
-        Drawer.main("src.Drawer");
-    } */
-    
-    public void printMatriz(){
+        String resultado = new String();
         for(int i = 0; i < genes.getGene(0).getList().size(); i++){
             for(int j = 0; j < genes.getGene(0).getList().size(); j++){
                 if(i == j || i > j){
-                    System.out.print("1.00000 \t");
+                    resultado += "1.000000 \t";
                 }
                 else{
-                    System.out.print(Double.valueOf(String.format(Locale.US, "%.2f", matriz[i][j])) + "\t\t");
+                    resultado += Double.valueOf(String.format(Locale.US, "%.2f", matriz[i][j])).toString();
+                    resultado += "\t";
                 }
             }
-            System.out.print("\n");
+            resultado += "\n";
         }
+        
+        return resultado;
+    }
+    
+    public String printListaD(){ //Método que retorna o rank ddas distancias em texto
+        if(!init){
+            initMatriz();
+        }
+        String resultado = new String();
         for(EDADistancias ed: distancias.getDistancias()){
-            ed.print();
+            resultado += ed.print();
         }
+        return resultado;
     }
 }

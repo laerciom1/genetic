@@ -1,37 +1,33 @@
 /*
- * Tela que exibe a assinatura gerada;
- * Vale ressaltat que o método que está sendo
- * usado para o calculo dos genes representativos
- * é o método da variância
+ * Tela que exibe a matriz de distancias geradas.
+ * Vale ressaltar que esta sendo usada a distancia Euclidiana
+ * para o calculo dessa distancia;
  */
 package src;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.Box;
-import javax.swing.JMenuItem;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
-public class TelaEAssinatura extends JFrame{
-    //Atributos do layout
+public class TelaEMatriz extends JFrame{
     JMenuBar menuBar = new JMenuBar();
     JMenu menuSalvar = new JMenu("Arquivo"); 
     JMenuItem menuSSalvar = new JMenuItem("Salvar");
     JScrollPane scrollPane;
     JTextArea tArea;
-    
-    public TelaEAssinatura(EDAmostra amostra){
-        //Setando atributos da UI
-        super("Assinatura"); 
-        geraLista(amostra); //Esse método gera a String que será exibida nesta tela;
-        initTelaEAssinatura();
+    public TelaEMatriz(EDMatrizDistancia md){
+        super("Matriz de Distancias"); 
+        geraLista(md); //Esse método gera a String que será exibida nesta tela;
+        initTelaEMatriz();
         
         //Configurando o botão salvar
         menuSSalvar.addActionListener((ActionEvent e) -> {
@@ -45,7 +41,7 @@ public class TelaEAssinatura extends JFrame{
         this.setVisible(true);
     }
     
-    private void initTelaEAssinatura(){
+    private void initTelaEMatriz(){
         this.setLayout(null);
         this.setPreferredSize(new java.awt.Dimension(1280, 720));
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -61,9 +57,9 @@ public class TelaEAssinatura extends JFrame{
         add(box);
     }
     
-    private void geraLista(EDAmostra amostra){ //Esse método gera a String que será exibida nesta tela;
+    private void geraLista(EDMatrizDistancia md){ //Esse método gera a String que será exibida nesta tela;
         String resultado = new String();
-        resultado = amostra.printAssinatura();
+        resultado = md.printMatriz();
         tArea = new JTextArea(resultado);
     }
 }

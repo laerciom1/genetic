@@ -1,20 +1,22 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Estrutura de dado para armazer todas as distancias entre todos os individuos
  */
 package src;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author CH1CO
- */
 public class EDDistancias {
-    private EDADistancias[] distancias;
+    private EDADistancias[] distancias; /* Vetor que armazena as distancias.
+                                         * O rmazenamento pode ser feito
+                                         * em vetor, pois dado quantos individuos
+                                         * possui a amostra, é possivel saber
+                                         * quantas distancias serão produzidas
+                                         * atrave´s da formula:
+                                         *            (id*id)-id/2;
+                                         * Onde id é o numero de individuos
+                                         */
     
-    public EDDistancias(int tamanho){
+    public EDDistancias(int tamanho){ // Inicializando o velor
         distancias = new EDADistancias[tamanho];
         for(int i = 0; i < tamanho; i++){
             distancias[i] = new EDADistancias(0,0,0);
@@ -29,14 +31,7 @@ public class EDDistancias {
         distancias[index] = new EDADistancias(id1,id2,distancia);
     }
     
-    public void setDistancias(int tamanho){
-        this.distancias = new EDADistancias[tamanho];
-        for(int i = 0; i < tamanho; i++){
-            distancias[i] = new EDADistancias(0,0,0);
-        }
-    }
-    
-    //Código adaptado de http://pt.wikipedia.org/wiki/Heapsort#C.C3.B3digo_em_Java
+    //Heapsort - Código adaptado de http://pt.wikipedia.org/wiki/Heapsort#C.C3.B3digo_em_Java
     public void heapSort()
        {
          buildMaxHeap();

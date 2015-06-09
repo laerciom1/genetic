@@ -24,17 +24,11 @@ public class SalvaArquivo extends JFileChooser{
             writer = new FileWriter(arquivo);
             writer.write(texto);
         } 
-        catch(IOException ex){
-            // Possiveis erros aqui
-        }
+        catch(IOException ex){}
         finally {
             if(writer != null){
-                try{
-                    writer.close();
-                } 
-                catch (IOException x){
-                       //   
-                }
+                try{writer.close();} 
+                catch (IOException x){}
             }
         }
     }

@@ -1,19 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe que guarda os atributos necessários para desenhar uma linha no
+ * PApplet (Drawer).
  */
 package src;
 
-/**
- *
- * @author CH1CO
- */
-public class Linha {
+public class ZNF_Linha {
     private float EY, Ey, EX;
     private float DY, Dy, DX;
 
-    public Linha(float EY, float Ey, float EX, float DY, float Dy, float DX) {
+    public ZNF_Linha(float EY, float Ey, float EX, float DY, float Dy, float DX) {
         this.EY = EY;
         this.Ey = Ey;
         this.EX = EX;

@@ -5,10 +5,7 @@
  */
 package src;
 
-/**
- *
- * @author CH1CO
- */
+import java.util.Locale;
 public class EDADistancias {
     //Indexes dos individuos 1 e 2
     private int id1,id2;
@@ -33,23 +30,15 @@ public class EDADistancias {
         return distancia;
     }
     
-    public float getDistanciaFloat() {
-        return (float)distancia;
-    }
-
-    public void setId1(int id1) {
-        this.id1 = id1;
-    }
-
-    public void setId2(int id2) {
-        this.id2 = id2;
-    }
-
-    public void setDistancia(double distancia) {
-        this.distancia = distancia;
-    }
-    
-    public void print(){
-        System.out.println("Distancia entre " + id1 + " e " + id2 + ": " + distancia);
+    public String print(){
+        String resultado = new String();
+        resultado += "Distancia entre ";
+        resultado += id1;
+        resultado += " e ";
+        resultado += id2;
+        resultado += ": ";
+        resultado += Double.valueOf(String.format(Locale.US, "%.2f", distancia)).toString();
+        resultado += "\n";
+        return resultado;
     }
 }

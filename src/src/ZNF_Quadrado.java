@@ -1,18 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe que guarda os atributos necessários para desenhar um quadrado no
+ * PApplet (Drawer).
  */
 package src;
 
-/**
- *
- * @author CH1CO
- */
-public class Quadrado {
+public class ZNF_Quadrado {
     private float X, Y, tamanho;
     
-    public Quadrado(float x, float y, float tamanho){
+    public ZNF_Quadrado(float x, float y, float tamanho){
         this.X = x;
         this.Y = y;
         this.tamanho = tamanho;

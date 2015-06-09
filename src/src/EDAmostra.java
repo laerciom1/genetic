@@ -16,38 +16,36 @@ public class EDAmostra {
     ArrayList<EDGene> genes = new ArrayList<>(); //ArrayLista com todos os Genes
     
     
-    public EDAmostra(int tamanho){
+    public EDAmostra(int tamanho){ /* É preciso definir o tamanho da assinatura
+                                    * aqui, esse vetor será preenchido durante
+                                    * a leitura dos dados. Como não se trata de 
+                                    * uma estrutura dinâmica, deve-se saber o
+                                    * tamanho da assinatura previamente
+                                    */
         assinatura = new EDAssinatura(tamanho);
     }
     
-    public EDGene getGene(int id){
+    public EDGene getGene(int id){//Retorna um gene ESPECIFICO
         return genes.get(id);
     }
     
-    public ArrayList<EDGene> getAllGenes(){
+    public ArrayList<EDGene> getAllGenes(){//Retorna A LISTA com todos os Genes
         return genes;
     }
     
-    public void add(EDGene gene){
+    public void add(EDGene gene){//Adiciona um gene a lista de Genes
         this.genes.add(gene);
-    }
-    
-    public void printAll(){
-        for(EDGene g: genes){
-            System.out.print("" + genes.indexOf(g) + " ");
-            g.print();
-        }
     }
     
     public EDAssinatura getAssinatura(){
         return assinatura;
     }
     
-    public String printAssinatura(){
+    public String printAssinatura(){// Método que gera e retorna a assinatura representada em texto
         EDAVarianciaID[] variancias = assinatura.getAssinatura();
         String resultado = new String();
-        for(int i = 0; i < variancias.length; i++){
-            resultado += "Gene " + (variancias[i].getId()) + "\t->  Variancia:  " + Double.valueOf(String.format(Locale.US, "%.2f", variancias[i].getVariancia())).toString() + ",\n";
+        for (EDAVarianciaID variancia : variancias) {
+            resultado += "Gene " + (variancia.getId()) + "\tVariancia: " + Double.valueOf(String.format(Locale.US, "%.2f", variancia.getVariancia())).toString() + ",\n";
         }
         return resultado;
     }

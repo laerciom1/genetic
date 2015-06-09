@@ -7,12 +7,10 @@ package src;
 public class EDAVarianciaID {
     //Variancia do Gene
     private double variancia;
-    //ID do Gene
+    //ID do Gene que corresponde a posição dele no array com todos os genes
+    //pertencente a amostra
     private int id;
     
-    public EDAVarianciaID(){
-    }
-
     public double getVariancia() {
         return variancia;
     }
