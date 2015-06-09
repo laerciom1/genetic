@@ -64,7 +64,7 @@ public class SeletorArquivo extends JFileChooser{
                 v = g.toVector();
                 amostra.getAssinatura().add(variance.evaluate(v), amostra.getAllGenes().indexOf(g)); //Adicionando (ou não) o gene a assinatura;
             }
-            leu = !leu;/* Aopós a primeira leitura,
+            leu = !leu;/* Após a primeira leitura,
                         * o booleano é setado para true para sinalizar que já houve a primeira leitura;
                         */
         }

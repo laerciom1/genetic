@@ -13,9 +13,9 @@ public class EDMatrizDistancia {
     EDDistancias distancias;
 
     public EDMatrizDistancia(EDAmostra amostra) {
-        this.variancias = amostra.assinatura.getAssinatura();
-        this.matriz = new double[variancias.length][variancias.length];
+        this.variancias = amostra.getAssinatura().getAssinatura();
         this.genes = amostra;
+        this.matriz = new double[genes.getGene(0).getList().size()][genes.getGene(0).getList().size()];
         this.distancias = new EDDistancias(((genes.getGene(0).getList().size()*genes.getGene(0).getList().size())-genes.getGene(0).getList().size())/2);//Formula de uma PA
     }
     
@@ -36,6 +36,25 @@ public class EDMatrizDistancia {
         distancias.heapSort();
     }
     
+/*    public void gerarDendograma(){
+        int x = 0;
+        for(EDADistancias ed: distancias.getDistancias()){
+            if(!EDArvoreDendograma.getArrayID().contains(ed.getId1()) && !EDArvoreDendograma.getArrayID().contains(ed.getId2())){
+                new EDArvoreDendograma(new EDArvoreDendograma(ed.getId1(), ++x), new EDArvoreDendograma(ed.getId2(), ++x), ed.getDistanciaFloat());
+            }
+            else if(EDArvoreDendograma.getArrayID().contains(ed.getId1()) && !EDArvoreDendograma.getArrayID().contains(ed.getId2())){
+ //                new EDArvoreDendograma(EDArvoreDendograma.getInstance().getPai(ed.getId1()), new EDArvoreDendograma(ed.getId2(), ++x), ed.getDistanciaFloat());
+            }
+            else if(EDArvoreDendograma.getArrayID().contains(ed.getId2()) && !EDArvoreDendograma.getArrayID().contains(ed.getId1())){
+//                new EDArvoreDendograma(EDArvoreDendograma.getInstance().getPai(ed.getId2()), new EDArvoreDendograma(ed.getId1(), ++x), ed.getDistanciaFloat());
+            }
+            else if(EDArvoreDendograma.getInstance().getPai(ed.getId1()).equals(EDArvoreDendograma.getInstance().getPai(ed.getId2()))){
+                new EDArvoreDendograma(EDArvoreDendograma.getInstance().getPai(ed.getId1()), EDArvoreDendograma.getInstance().getPai(ed.getId2()), ed.getDistanciaFloat());
+            }
+        }
+        Drawer.main("src.Drawer");
+    } */
+    
     public void printMatriz(){
         for(int i = 0; i < genes.getGene(0).getList().size(); i++){
             for(int j = 0; j < genes.getGene(0).getList().size(); j++){
@@ -43,7 +62,7 @@ public class EDMatrizDistancia {
                     System.out.print("1.00000 \t");
                 }
                 else{
-                    System.out.print(Double.valueOf(String.format(Locale.US, "%.2f", matriz[i][j])) + "\t");
+                    System.out.print(Double.valueOf(String.format(Locale.US, "%.2f", matriz[i][j])) + "\t\t");
                 }
             }
             System.out.print("\n");

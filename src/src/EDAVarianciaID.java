@@ -5,7 +5,9 @@
 package src;
 
 public class EDAVarianciaID {
+    //Variancia do Gene
     private double variancia;
+    //ID do Gene
     private int id;
     
     public EDAVarianciaID(){

@@ -4,6 +4,7 @@
 */
 package src;
 
+import src.Drawer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -15,6 +16,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.WindowConstants;
+import processing.core.PApplet;
+import src.EDAmostra;
+import src.EDMatrizDistancia;
+import src.OnAssinaturaResponseListener;
+import src.SeletorArquivo;
+import src.TelaDTamanhoAssinatura;
+import src.TelaEAssinatura;
+import src.TelaEListaGenes;
 
 public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseListener{ 
     //Atributos do layout
@@ -76,10 +85,11 @@ public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseL
             EDMatrizDistancia md = new EDMatrizDistancia(amostra);
             md.initMatriz();
             md.printMatriz();
+            //md.gerarDendograma();
         } );
         
         menuEDendograma.addActionListener( (ActionEvent e) -> { //Exibir tela com o dendograma gerado
-        
+            Drawer.main("src.Drawer");
         } ); 
         
         //Exibindo a janela
@@ -119,5 +129,3 @@ public final class TelaPrincipal extends JFrame implements OnAssinaturaResponseL
         try { amostra = SA.lerAmostras(tamanhoDeAssinatura); } catch (IOException ex) {Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);}
     }
 }
-
-

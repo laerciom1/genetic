@@ -12,8 +12,9 @@ import java.util.Locale;
 import org.apache.commons.math3.stat.descriptive.moment.Variance;
 
 public class EDAmostra {
-    public EDAssinatura assinatura;
-    ArrayList<EDGene> genes = new ArrayList<>();
+    private EDAssinatura assinatura; //Assinatura
+    ArrayList<EDGene> genes = new ArrayList<>(); //ArrayLista com todos os Genes
+    
     
     public EDAmostra(int tamanho){
         assinatura = new EDAssinatura(tamanho);

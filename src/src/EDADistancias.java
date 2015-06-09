@@ -10,7 +10,9 @@ package src;
  * @author CH1CO
  */
 public class EDADistancias {
+    //Indexes dos individuos 1 e 2
     private int id1,id2;
+    //Distancia Euclidiana entre os individuos 1 e 2
     private double distancia;
     
     public EDADistancias(int id1, int id2, double distancia){
@@ -29,6 +31,10 @@ public class EDADistancias {
 
     public double getDistancia() {
         return distancia;
+    }
+    
+    public float getDistanciaFloat() {
+        return (float)distancia;
     }
 
     public void setId1(int id1) {
